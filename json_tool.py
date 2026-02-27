@@ -5,10 +5,16 @@ import shutil
 from pathlib import Path
 
 def select_input_dir():
-    input_var.set(filedialog.askdirectory(title="选择源文件夹"))
+    # 【优化】获取路径，如果用户没点取消，才填入输入框
+    path = filedialog.askdirectory(title="选择源文件夹")
+    if path:
+        input_var.set(path)
 
 def select_output_dir():
-    output_var.set(filedialog.askdirectory(title="选择保存的输出文件夹"))
+    # 【优化】获取路径，如果用户没点取消，才填入输入框
+    path = filedialog.askdirectory(title="选择保存的输出文件夹")
+    if path:
+        output_var.set(path)
 
 # 向界面的文本框打印日志
 def log_msg(msg):
@@ -114,7 +120,6 @@ def run_process():
 # ================= 界面绘制 (GUI) =================
 root = tk.Tk()
 root.title("JSON 批量处理专家")
-# 【修改1】把窗口宽度从 550 加宽到 650，防止 Mac 界面拥挤
 root.geometry("650x450") 
 
 input_var = tk.StringVar()
@@ -125,13 +130,13 @@ frame_top = tk.Frame(root)
 frame_top.pack(pady=10, fill="x", padx=15)
 
 tk.Label(frame_top, text="1. 源文件夹:").grid(row=0, column=0, sticky="w", pady=5)
-# 【修改2】把文本框宽度从 45 缩短到 35
-tk.Entry(frame_top, textvariable=input_var, state="readonly", width=35).grid(row=0, column=1, padx=5)
+# 【核心修改】删掉了 state="readonly"，打破 Mac 的输入框封锁
+tk.Entry(frame_top, textvariable=input_var, width=35).grid(row=0, column=1, padx=5)
 tk.Button(frame_top, text="浏览...", command=select_input_dir).grid(row=0, column=2)
 
 tk.Label(frame_top, text="2. 输出文件夹:").grid(row=1, column=0, sticky="w", pady=5)
-# 【修改3】把文本框宽度从 45 缩短到 35
-tk.Entry(frame_top, textvariable=output_var, state="readonly", width=35).grid(row=1, column=1, padx=5)
+# 【核心修改】删掉了 state="readonly"，打破 Mac 的输入框封锁
+tk.Entry(frame_top, textvariable=output_var, width=35).grid(row=1, column=1, padx=5)
 tk.Button(frame_top, text="浏览...", command=select_output_dir).grid(row=1, column=2)
 
 # 中间按钮
