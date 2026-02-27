@@ -23,7 +23,7 @@ jobs:
 
     - name: 开始生成 Mac 软件
       run: |
-        pyinstaller --noconsole --onefile --windowed json_replacer.py
+        pyinstaller --noconsole --onefile --windowed json_tool.py
 
     - name: 上传打包好的成品供你下载
       uses: actions/upload-artifact@v4
