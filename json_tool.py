@@ -114,7 +114,8 @@ def run_process():
 # ================= 界面绘制 (GUI) =================
 root = tk.Tk()
 root.title("JSON 批量处理专家")
-root.geometry("550x450") # 把窗口拉高一点，用来放日志框
+# 【修改1】把窗口宽度从 550 加宽到 650，防止 Mac 界面拥挤
+root.geometry("650x450") 
 
 input_var = tk.StringVar()
 output_var = tk.StringVar()
@@ -124,11 +125,13 @@ frame_top = tk.Frame(root)
 frame_top.pack(pady=10, fill="x", padx=15)
 
 tk.Label(frame_top, text="1. 源文件夹:").grid(row=0, column=0, sticky="w", pady=5)
-tk.Entry(frame_top, textvariable=input_var, state="readonly", width=45).grid(row=0, column=1, padx=5)
+# 【修改2】把文本框宽度从 45 缩短到 35
+tk.Entry(frame_top, textvariable=input_var, state="readonly", width=35).grid(row=0, column=1, padx=5)
 tk.Button(frame_top, text="浏览...", command=select_input_dir).grid(row=0, column=2)
 
 tk.Label(frame_top, text="2. 输出文件夹:").grid(row=1, column=0, sticky="w", pady=5)
-tk.Entry(frame_top, textvariable=output_var, state="readonly", width=45).grid(row=1, column=1, padx=5)
+# 【修改3】把文本框宽度从 45 缩短到 35
+tk.Entry(frame_top, textvariable=output_var, state="readonly", width=35).grid(row=1, column=1, padx=5)
 tk.Button(frame_top, text="浏览...", command=select_output_dir).grid(row=1, column=2)
 
 # 中间按钮
